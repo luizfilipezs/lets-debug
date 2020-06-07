@@ -40,7 +40,7 @@ class Person:
     def code(self):
         pass
 
-class Programmer:
+class Programmer(Person):
 
     def __init__(self, is_alive):
         super().__init__(is_alive)
