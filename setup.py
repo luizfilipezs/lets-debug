@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='lets-debug',
-    version='0.0.2',
+    version='0.0.3',
     url='https://github.com/luizfilipezs/lets-debug',
     license='MIT License',
     author='Luiz Filipe da Silva',
