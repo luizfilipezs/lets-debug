@@ -1,4 +1,4 @@
-import os
+import os, platform
 from time import time
 from typing import Any, Dict, List
 
@@ -37,10 +37,11 @@ class _Terminal(object):
         for arg in args:
             self.__write(arg, self.__Colors.FAIL)
 
-    def clear(self, operacional_system='unix'):
-        if operacional_system == 'unix':
+    def clear(self):
+        system = platform.system()
+        if system == 'Linux' or system == 'Darwin':
             os.system('clear')
-        elif operacional_system == 'win':
+        elif system == 'Windows':
             os.system('cls')
 
     def success(self, *args):
@@ -49,7 +50,7 @@ class _Terminal(object):
         if len(args) == 0:
             self.__write('OK', self.__Colors.OKGREEN)
 
-    def count(self, name='contador') -> int:
+    def count(self, name='counter') -> int:
         i = next((self.__count_names.index(item) for item in self.__count_names if item['name'] == name), None)
         if i is None:
             dictionary = { 'name': name, 'count': 1 }
