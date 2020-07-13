@@ -92,6 +92,8 @@ Counts how long a function takes to run.
 Check if the current method exists in its parent object. See the example bellow:
 
 ```python
+from lets_debug import DecoratorTools as debug
+
 class Human:
 
     def walk(self):
@@ -99,7 +101,7 @@ class Human:
 
 class Person(Human):
 
-    @override
+    @debug.override
     def walk(self):
         terminal.log('Person is walking...')
 ```
@@ -109,7 +111,7 @@ This code is OK. But if you remove `walk()` from `Human` class, an error message
 If you want the program to stop in this situations, set `get_error` option to `True`:
 
 ```python
-@override(get_error=True)
+@debug.override(get_error=True)
 def walk(self):
 ```
 
