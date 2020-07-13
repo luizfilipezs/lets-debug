@@ -65,13 +65,13 @@ class _Terminal(object):
     # É semelhante ao comando nativo assert, mas não para o programa, apenas imprime o callback
     def check_bool(self, boolean: bool, callback: Any):
         if not type(boolean) is bool:
-            self.error("Terminal.check_bool: o argumento deve ser do tipo bool!")
+            self.error("Terminal.check_bool: first argument must be a bool!")
         elif not boolean is True:
-            self.warn(f"Checagem falhou: {callback}")
+            self.warn(f"Check failed: {callback}")
 
     def table(self, dictionary_list: List[Dict]):
         if not type(dictionary_list) is list:
-            return self.error("Terminal.table: o argumento deve ser uma list de dicionários!")
+            return self.error("Terminal.table: argument must be a list of dicts!")
 
         keys = []
         for d in dictionary_list:

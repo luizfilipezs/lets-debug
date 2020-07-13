@@ -29,9 +29,9 @@ class DecoratorTools(object):
                     to_log, cmd = logs, f"terminal.{type}(*logs)"
                     exec(cmd, globals(), locals())
                 except AttributeError:
-                    terminal.error(f"DecoratorTools.log: Tipo inválido de log utilizado na função {func.__name__}")
+                    terminal.error(f"DecoratorTools.log: Invalid type of log used in {func.__name__}")
                 except SyntaxError:
-                    terminal.error(f"DecoratorTools.log: Tipo de log provavelmente não especificado na função {func.__name__}")
+                    terminal.error(f"DecoratorTools.log: Log type probably not specified in {func.__name__}")
                 response = func(*args, **kwargs)
                 return response
             return wrapper
@@ -64,7 +64,7 @@ class DecoratorTools(object):
                 ti = time()
                 response = func(*args, **kwargs)
                 tf = time()
-                terminal.warn(f"Tempo de execução de {func.__name__}: {(tf - ti) * multiply}")
+                terminal.warn(f"Execution duration of {func.__name__}: {(tf - ti) * multiply}")
                 return response
             return wrapper
         if 'get_ms' in kwargs and type(kwargs['get_ms']) is bool:
@@ -94,7 +94,7 @@ class DecoratorTools(object):
                     parents.remove(object)
                 # Retorna erro se a classe não for herdada
                 if len(parents) == 0:
-                    error_msg = f"O método {func.__name__} não pode ser sobrescrito porque {cls.__name__} não é uma classe herdada"
+                    error_msg = f"{func.__name__}() method cannot be overridden because {cls.__name__} is not an inherited class!"
                     throw_error(error_msg, stop_application)
                 else:
                     # Verifica se o método existe em alguma classe-mãe
@@ -102,7 +102,7 @@ class DecoratorTools(object):
                     # Retorna erro se o método não existir em uma de suas classes-mãe
                     if not exists:
                         parents_list = ', '.join([parent.__name__ for parent in parents])
-                        error_msg = f"O método {func.__name__}() da classe {cls.__name__} não está definido em sua(s) super classe(s) ({parents_list}) e por isso não foi sobrescrito"
+                        error_msg = f"{func.__name__}() method from {cls.__name__} is not defined in its parent class(es) ({parents_list}), so it cannot be overriden!"
                         throw_error(error_msg, stop_application)
                 return func(*args, **kwargs)
             return wrapper
