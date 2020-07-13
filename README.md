@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This packages allows you to debug your Python code using terminal tools.
+This package allows you to debug your Python code using terminal tools.
 
 ## Installation
 
@@ -101,7 +101,7 @@ class Person(Human):
         terminal.log('Person is walking...')
 ```
 
-This code is OK. But if you remove `walk()` from `Human` class, an error message will be appear in the output.
+This code is OK. But if you remove `walk()` from `Human` class, an error message will appear in the output.
 
 If you want the program to stop in this situations, set `get_error` option to `True`:
 
@@ -109,3 +109,7 @@ If you want the program to stop in this situations, set `get_error` option to `T
 @override(get_error=True)
 def walk(self):
 ```
+
+## Contributions
+
+Feel free to use this package and to contribute on this repository with your ideas!
