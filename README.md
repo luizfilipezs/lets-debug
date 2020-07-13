@@ -1,56 +1,111 @@
 # lets-debug
 
-## Install
+## Introduction
+
+This packages allows you to debug your Python code using terminal tools.
+
+## Installation
 
 `pip install lets-debug`
 
-## Tools
-
-You will find useful tools for debugging in Python with this package.
-
-The main feature here is `terminal` variable, an istance of `_Terminal` class that allows you to print anything on terminal using different colors. Some methods of this class are similar to JavaScript `Console` native class.
-
-Another useful tool for debugging code is `stopwatch` decorator method from `DecoratorTools` class. It allows you to verify how much longer is the waiting time for any function.
+### Imports
 
 ```python
-from lets_debug import terminal, DecoratorTools as tools
-
-@tools.stopwatch
-def greeting():
-    terminal.count('Greeting function')
-
-greeting()
+from lets_debug import terminal, DecoratorTools
 ```
 
-The example code above will give you an output like this:
+## Reference
 
-```
-Greeting function: 1
-Waiting time for greeting: 0.04291534423828125
-```
+### `terminal`
 
-Some ideas of this package come from other languages, like Java.
+These are the available methods from `terminal`:
+
+#### `log(*args)`
+
+Prints every element passed in `*args` using blue color.
+
+#### `warn(*args)`
+
+Prints every element passed in `*args` using orange color.
+
+#### `error(*args)`
+
+Prints every element passed in `*args` using red color.
+
+#### `success(*args)`
+
+Prints every element passed in `*args` using green color.
+
+#### `clear()`
+
+Clear terminal or command prompt screen.
+
+#### `count(name='counter')`
+
+Counts number of times that `name` was called using this method. It is useful for couting number of times that a function is called. See the example bellow:
 
 ```python
-class Person:
+def greet():
+    terminal.log('Welcome!')
+    terminal.count('greet')
 
-    def __init__(self, is_alive=True):
-        self.is_alive = is_alive
-
-    def code(self):
-        pass
-
-class Programmer(Person):
-
-    def __init__(self, is_alive):
-        super().__init__(is_alive)
-
-        if self.is_alive:
-            self.code()
-
-    @tools.override(get_error=True) # If code() does not exist on Person class an Exception occurs
-    def code(self):
-        terminal.log('Keep coding :)')
+greet()
+greet()
 ```
 
-Now, explore the tools of this package and feel free to colaborate with your best ideas!
+The output will be:
+
+```bash
+greet: 1
+greet: 2
+```
+
+#### `check_bool(boolean: bool, callback: Any)`
+
+Prints `callback` if `boolean` is `False`.
+
+#### `table(dictionary_list: List[Dict])`
+
+Prints `dictionary_list` as table.
+
+### `DecoratorTools`
+
+These are the available methods from `DecoratorTools` class (all methods are static):
+
+#### `log(*args, type='log')`
+
+Prints every element passed in `*args` using custom color. `type` argument defines the color. The available types are `'log'`, `'warn'`, `'error'`, and `'success'`. 
+
+#### `count(*args)`
+
+Counts number of times that a function was called.
+
+#### `stopwatch(*args)`
+
+Counts how long a function takes to run.
+
+#### `override(*args, **kwargs)`
+
+Check if the current method exists in its parent object. See the example bellow:
+
+```python
+class Human:
+
+    def walk(self):
+        terminal.log('Human is walking...')
+
+class Person(Human):
+
+    @override
+    def walk(self):
+        terminal.log('Person is walking...')
+```
+
+This code is OK. But if you remove `walk()` from `Human` class, an error message will be appear in the output.
+
+If you want the program to stop in this situations, set `get_error` option to `True`:
+
+```python
+@override(get_error=True)
+def walk(self):
+```
