@@ -1,5 +1,8 @@
 # lets-debug
 
+[![Build Status](https://img.shields.io/pypi/v/lets-debug.svg)](https://pypi.org/project/lets-debug/)
+
+
 ## Introduction
 
 This package allows you to debug your Python code using terminal tools.
